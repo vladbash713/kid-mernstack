@@ -18,7 +18,7 @@ let last  = 0;
 const shuffle = (array) => {
     var currentIndex = array.length, temporaryValue, randomIndex;
     // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
+    while (currentIndex !==0 ) {
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
@@ -33,8 +33,8 @@ const shuffle = (array) => {
 const setAnswers = (questions, answers) => {
     let newAnswers = [];
     for(let item of questions){
-        let temp = answers.filter(answer => item.aid === answer.aid );
-        if(temp && temp.length > 0) newAnswers.push(temp[0]);
+        let temp = answers.filter(answer => item.aid === answer.aid);
+        if (temp && temp.length > 0) newAnswers.push(temp[0]);
     }
     newAnswers = shuffle(newAnswers);
     return newAnswers;
@@ -46,13 +46,13 @@ class Matching extends React.Component {
         this.state = {
             currentPage: 1,
             todosPerPage: 5,   
-            data:{},       
+            data: {},       
             answers: [],
             submited: false,
             resultMsg: '',
             elapsedTime: 0,
             height: 0,
-            timeCountStart : true,
+            timeCountStart: true,
         }
     }
 
@@ -71,7 +71,7 @@ class Matching extends React.Component {
 
     static getDerivedStateFromProps(props, state) {
         let data = props.matching.data;
-        if(data && data!==state.data && data.questions){
+        if(data && data !== state.data && data.questions){
             if(props.matching.isStart){
                 data.questions = shuffle(data.questions);
                 data.answers = shuffle(data.answers);
@@ -155,7 +155,7 @@ class Matching extends React.Component {
 
         for(let i = 0; i < answers.length; i ++){
             let obj = currentQuestions.find(o => o.answered === answers[i].aid);
-            if(obj) answers[i].result = obj.aid === obj.answered?"success" : "failed";
+            if(obj) answers[i].result = obj.aid === obj.answered ? "success" : "failed";
         }
         data.answers = answers;
         this.setState({data: data, timeCountStart: false});
@@ -170,12 +170,12 @@ class Matching extends React.Component {
             let currentQuestions = questions.slice(indexOfFirstTodo, indexOfLastTodo);
             let currentAnswers = answers.slice(indexOfFirstTodo, indexOfLastTodo);
             prev  = currentPage > 0 ? (currentPage -1) :0;
-            last = Math.ceil(questions.length/todosPerPage);
+            last = Math.ceil(questions.length / todosPerPage);
             let pageNumbers = [];
-            for (let i = 1; i <=last; i++) {
+            for (let i = 1; i <= last; i ++) {
                 pageNumbers.push(i);
             }
-            let answeredNumber = currentQuestions.filter((item) =>(item.answered > 0)).length;
+            let answeredNumber = currentQuestions.filter((item) => (item.answered > 0)).length;
             return (
                 <DndProvider backend={HTML5Backend}>
                     <div className = "row">
@@ -183,9 +183,9 @@ class Matching extends React.Component {
                             <div className = "col-sm-12" style = {styles.leftWrapper}>
                                 <div className = "col-sm-12" style = {{...styles.card, paddingBottom: 30 }}>
                                     <div className = "row" >
-                                        <div className = "col-sm-12 col-md-8" style = {{...styles.itemContainer, paddingBottom: 20}}>
+                                        <div className = "col-sm-12 col-md-8" style = {{ ...styles.itemContainer, paddingBottom: 20 }}>
                                             <div className = "col-sm-12"  ref = "boardWrapper" id = "board-wrapper" style = {styles.itemsWrapper}>
-                                                <div style = {{position: 'absolute', left: 45, top: 0}}>
+                                                <div style = {{ position: 'absolute', left: 45, top: 0 }}>
                                                     <Line data = { currentQuestions } boardRef = {this.refs.boardWrapper} currentAnswers = {currentAnswers}/>
                                                 </div>
                                                 <div className="col-sm-6">
@@ -198,11 +198,13 @@ class Matching extends React.Component {
                                                 </div>
                                                 
                                             </div>
-                                            <Button style = {{width: "40%"}} color="primary" size="sm" onClick = {this.submit}>submit</Button>
+                                            <Button style = {{ width: "40%" }} color = "primary" size = "sm" onClick = {this.submit}>
+                                                submit
+                                            </Button>
                                         </div>
-                                        <div className = "col-sm-12 col-md-4 " style = {{ paddingTop: 20}}>
+                                        <div className = "col-sm-12 col-md-4 " style = {{ paddingTop: 20 }}>
                                             <AnsweredCounter value = {answeredNumber} type = "count" />
-                                            <TimeCounter isStarting = { this.state.timeCountStart } currentPage = {this.state.currentPage} />
+                                            <TimeCounter isStarting = {this.state.timeCountStart} currentPage = {this.state.currentPage} />
                                         </div>
                                     </div>
                                 </div>

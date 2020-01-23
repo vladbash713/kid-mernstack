@@ -11,23 +11,28 @@ export default function PaginationComponent({prev, pageNumbers, currentPage, las
             <nav>
                 <Pagination>
                     <PaginationItem>
-                    { prev === 0 ? <PaginationLink disabled>First</PaginationLink> :
-                        <PaginationLink onClick={handleFirstClick} id={prev} href={prev}>First</PaginationLink>
+                    { prev === 0 ?
+                        <PaginationLink disabled>First</PaginationLink> :
+                        <PaginationLink onClick = {handleFirstClick} id={prev} href={prev}>
+                            First
+                        </PaginationLink>
                     }
                     </PaginationItem>
                     <PaginationItem>
                     { prev === 0 ? <PaginationLink disabled>Prev</PaginationLink> :
-                        <PaginationLink onClick={handleClick} id={prev} href={prev}>Prev</PaginationLink>
+                        <PaginationLink onClick={handleClick} id={prev} href={prev}>
+                            Prev
+                        </PaginationLink>
                     }
                     </PaginationItem>
                         {
                         pageNumbers.map((number,i) =>
-                        <Pagination key= {i}>
-                        <PaginationItem active = {pageNumbers[currentPage-1] === (number) ? true : false} >
-                        <PaginationLink onClick={handleClick} href={number} key={number} id={number}>
-                        {number}
-                        </PaginationLink>
-                        </PaginationItem>
+                        <Pagination key={i}>
+                            <PaginationItem active={pageNumbers[currentPage-1] === (number) ? true : false} >
+                                <PaginationLink onClick={handleClick} href={number} key={number} id={number}>
+                                    {number}
+                                </PaginationLink>
+                            </PaginationItem>
                         </Pagination>
                         )}
 

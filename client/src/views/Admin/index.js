@@ -79,7 +79,7 @@ class Admin extends React.Component {
                     item.textColor = data.text_colors[Math.floor(Math.random() * data.text_colors.length)];
                 }
                 let tempAnswers = [];
-                for(let i = 1; i <= Math.ceil(data.questions.length/state.todosPerPage) ; i ++){
+                for(let i = 1; i <= Math.ceil(data.questions.length / state.todosPerPage) ; i ++){
                     let indexOfLastTodo = i * state.todosPerPage;
                     let indexOfFirstTodo = indexOfLastTodo - state.todosPerPage;
                     let currentQuestions = data.questions.slice(indexOfFirstTodo, indexOfLastTodo);

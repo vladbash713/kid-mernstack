@@ -1,23 +1,21 @@
 export const  styles = {
-    leftWrapper:{ 
+    leftWrapper: { 
         display: 'flex', 
         flexDirection: 'column',
         justifyContent:'space-between',
         paddingTop: 20, 
         paddingBottom: 20, 
-        // height: window.innerHeight * 0.85,
-        
     },
-    itemsWrapper:{ 
-        display: 'flex', 
-        justifyContent:'space-around',
+    itemsWrapper: { 
+        display: 'flex',
+        justifyContent: 'space-around',
         paddingBottom: 20,
     },
     itemContainer: {
         wordBreak: 'break-all',
         display: 'flex', 
         flexDirection: 'column',
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center'
     },
     card :{

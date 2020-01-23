@@ -15,27 +15,19 @@ export default class Matching extends React.Component {
         this.countTime();
     }
 
-    // static getDerivedStateFromProps(props, state) {
-    //     if(state.isStarting !== props.isStarting){
-    //         if(!props.isStarting) clearInterval(this.autoSaveInterval);
-    //         return {...state, isStarting: false};
-    //     }
-    //     return {...state};
-    // }
-
     componentDidUpdate(prevProps){
-        if(prevProps.isStarting !== this.props.isStarting){
-            if(!this.props.isStarting) clearInterval(this.autoSaveInterval);
+        if (prevProps.isStarting !== this.props.isStarting){
+            if (!this.props.isStarting) clearInterval(this.autoSaveInterval);
         }
-        if(this.props.isStarting && this.props.currentPage !== prevProps.currentPage){
-            this.setState({count: 0});
+        if (this.props.isStarting && this.props.currentPage !== prevProps.currentPage){
+            this.setState({ count: 0 });
             clearInterval(this.autoSaveInterval);
             this.countTime();
         }
     }
 
-    countTime = () =>{
-        this.autoSaveInterval = setInterval(()=>{
+    countTime = () => {
+        this.autoSaveInterval = setInterval(() => {
             this.setState((state, props) => ({
                 count: state.count + 1
               }));
@@ -49,9 +41,9 @@ export default class Matching extends React.Component {
     render() {
         const {count} = this.state;
         if(count !== "PAUSED"){
-            var hours = Math.floor(count/3600);
+            var hours = Math.floor(count / 3600);
             let remainMins = count - hours * 3600;
-            var mins = Math.floor(remainMins/60);
+            var mins = Math.floor(remainMins / 60);
             var secs = count - hours * 3600 - mins * 60;
             if(hours < 10) hours = "0" + hours;
             if(mins < 10) mins = "0" + mins;
@@ -59,20 +51,20 @@ export default class Matching extends React.Component {
         }
         return(
             <div style = {styles.container}>
-                <div style = {{ width: '100%', backgroundColor: backgroundColor, padding: "6px 0px 6px 0px", whiteSpace: "pre-line"}}>
+                <div style = {{ width: '100%', backgroundColor: backgroundColor, padding: "6px 0px 6px 0px", whiteSpace: "pre-line" }}>
                     {title}
                 </div>                        
-                <div style = {{...styles.valueWrapper, paddingBottom: 20}}>
+                <div style = {{ ...styles.valueWrapper, paddingBottom: 20 }}>
                 {
                     count === "PAUSED" &&
                         <span>{count}</span>
                 }
                 {
                     count !== "PAUSED" &&
-                        <div style = {{ display: 'flex', width: '100%', justifyContent: 'space-between', padding: '0px 3px'}}>
-                            <TimeComponent val = {hours} str = "HR"/>
-                            <TimeComponent val = {mins} str = "MIN"/>
-                            <TimeComponent val = {secs} str = "SEC"/>
+                        <div style = {{ display: 'flex', width: '100%', justifyContent: 'space-between', padding: '0px 3px' }}>
+                            <TimeComponent val = {hours} str = "HR" />
+                            <TimeComponent val = {mins} str = "MIN" />
+                            <TimeComponent val = {secs} str = "SEC" />
                         </div>
                 }
                 </div>
