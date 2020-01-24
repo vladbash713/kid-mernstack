@@ -11,9 +11,9 @@ export default function AnsweredCounter({type, value}) {
         title = "Time \n elapsed";
         backgroundColor = "#1fb2e4";
         if(value !== "PAUSED"){
-            var hours = Math.floor(value/3600);
+            var hours = Math.floor(value / 3600);
             let remainMins = value - hours * 3600;
-            var mins = Math.floor(remainMins/60);
+            var mins = Math.floor(remainMins / 60);
             var secs = value - hours * 3600 - mins * 60;
             if(hours < 10) hours = "0" + hours;
             if(mins < 10) mins = "0" + mins;
@@ -24,8 +24,8 @@ export default function AnsweredCounter({type, value}) {
         <div style = {styles.container}>
             <div style = {{ width: '100%', backgroundColor: backgroundColor, padding: "6px 0px 6px 0px", whiteSpace: "pre-line"}}>
                 {title}
-            </div>                        
-            <div style = {{...styles.valueWrapper, paddingBottom: 20}}>
+            </div>
+            <div style = {{ ...styles.valueWrapper, paddingBottom: 20 }}>
             {
                 (type === "count" || value === "PAUSED") &&
                     <span>{value}</span>

@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Users = mongoose.model('Users');
 const nodemailer = require('nodemailer');
-const xoauth2 = require('xoauth2');
 const async = require('async');
 const crypto = require('crypto');
 
@@ -26,9 +25,7 @@ exports.create = (req, res) => {
   }
   
   const finalUser = new Users(user);
-
   finalUser.setPassword(user.password);
-
   return finalUser.save()
     .then(() => res.json({ user: finalUser.toAuthJSON() }));
 
@@ -52,7 +49,7 @@ exports.findAll = (req, res) => {
         res.send(users);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while retrieving users."
+          message: err.message || "Some error occurred while retrieving users."
         });
     });
 };
@@ -116,7 +113,7 @@ exports.delete = (req, res) => {
     .then(user => {
         if(!user) {
             return res.status(404).send({
-                message: "User not found with id " + req.params.userId
+              message: "User not found with id " + req.params.userId
             });
         }
         res.send({message: "User deleted successfully!"});

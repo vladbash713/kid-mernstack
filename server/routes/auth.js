@@ -23,7 +23,7 @@ const auth = {
   }),
   isAdmin: (req, res, next) => {
     const { body: { user_role } } = req;
-    if (user_role!=='admin') {
+    if (user_role !== 'admin') {
       // user's role is not authorized
       return res.status(401).json({ message: 'Current user is not admin.' });
     }

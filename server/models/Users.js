@@ -21,7 +21,7 @@ const UsersSchema = new Schema({
   },
   activateState:{
     isActivated: {
-      type:Boolean,
+      type: Boolean,
       default: true
     },
     reason: String
